@@ -9,10 +9,23 @@ import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
 export default function Home() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
   
   // Ensure component is mounted before accessing theme
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Loading screen timer with smooth transition
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      // Short delay before showing main content
+      setTimeout(() => setShowContent(true), 300);
+    }, 250); 
+
+    return () => clearTimeout(timer);
   }, []);
   
   return (
@@ -25,77 +38,100 @@ export default function Home() {
         }}
       />
       
-      {/* Animated Particle Background - Always render for animation */}
+      {/* Always render Particle Background for smooth animation */}
       <ParticleBackground />
       
-      {/* Dark Mode Toggle */}
-      <DarkModeToggle />
-      
-      {/* Landing Page - Exactly 100vh */}
-      <div className="h-screen w-full flex items-center justify-center relative z-10">
-        {/* Main Content */}
-        <main className="text-center z-20 px-4 max-w-4xl">
-          <div className="space-y-4">
-            <h1 
-              className="text-4xl md:text-6xl lg:text-7xl font-thin tracking-wide leading-tight"
-              style={{ 
-                color: mounted && theme === 'dark' ? 'white' : 'black'
-              }}
-            >
-              Hethav Gopal
-            </h1>
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto"></div>
-            <p 
-              className="text-lg md:text-xl font-extralight tracking-widest uppercase"
-              style={{ 
-                color: mounted && theme === 'dark' ? 'white' : 'black',
-                letterSpacing: '0.2em'
-              }}
-            >
-              Full-Stack Developer
-            </p>
-          </div>
-        </main>
+      {/* Loading Screen with smooth fade only */}
+      <div 
+        className={`fixed inset-0 bg-black flex items-center justify-center z-50 transition-opacity duration-1000 ${
+          isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="text-center">
+          <h1 className="text-2xl md:text-3xl font-light text-white tracking-wide">
+            Hethav Gopal
+          </h1>
+          <p className="text-lg md:text-xl font-extralight text-gray-400 mt-2 tracking-wider">
+            Portfolio
+          </p>
+        </div>
       </div>
       
-      {/* Social Links */}
-      <div className="fixed left-8 bottom-8 z-30 flex flex-col space-y-4">
-        <a 
-          href="https://github.com" 
-          className="hover:opacity-70 transition-opacity"
-          style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
-        >
-          <Github size={20} />
-        </a>
-        <a 
-          href="https://linkedin.com" 
-          className="hover:opacity-70 transition-opacity"
-          style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
-        >
-          <Linkedin size={20} />
-        </a>
-        <a 
-          href="mailto:your@email.com" 
-          className="hover:opacity-70 transition-opacity"
-          style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
-        >
-          <Mail size={20} />
-        </a>
-      </div>
-      
-      {/* Scroll Indicator */}
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
-        <span 
-          className="text-xs font-light tracking-wide"
-          style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
-        >
-          Explore
-        </span>
-        <ChevronDown 
-          size={16} 
-          className="animate-bounce"
-          style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
-        />
+             
+       <div 
+         className={`transition-all duration-500 ${
+           showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+         }`}
+       >
+        {/* Dark Mode Toggle */}
+        <DarkModeToggle />
+        
+        {/* Landing Page - Exactly 100vh */}
+        <div className="h-screen w-full flex items-center justify-center relative z-10">
+          {/* Main Content */}
+          <main className="text-center z-20 px-4 max-w-4xl">
+            <div className="space-y-4">
+              <h1 
+                className="text-4xl md:text-6xl lg:text-7xl font-thin tracking-wide leading-tight"
+                style={{ 
+                  color: mounted && theme === 'dark' ? 'white' : 'black'
+                }}
+              >
+                Hethav Gopal
+              </h1>
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto"></div>
+              <p 
+                className="text-lg md:text-xl font-extralight tracking-widest uppercase"
+                style={{ 
+                  color: mounted && theme === 'dark' ? 'white' : 'black',
+                  letterSpacing: '0.2em'
+                }}
+              >
+                Full-Stack Developer
+              </p>
+            </div>
+          </main>
+        </div>
+        
+        {/* Social Links */}
+        <div className="fixed left-8 bottom-8 z-30 flex flex-col space-y-4">
+          <a 
+            href="https://github.com" 
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+          >
+            <Github size={20} />
+          </a>
+          <a 
+            href="https://linkedin.com" 
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+          >
+            <Linkedin size={20} />
+          </a>
+          <a 
+            href="mailto:your@email.com" 
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+          >
+            <Mail size={20} />
+          </a>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
+          <span 
+            className="text-xs font-light tracking-wide"
+            style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
+          >
+            Explore
+          </span>
+          <ChevronDown 
+            size={16} 
+            className="animate-bounce"
+            style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
+          />
+        </div>
       </div>
     </div>
   );
