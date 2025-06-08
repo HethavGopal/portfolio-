@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import ParticleBackground from '../components/ParticleBackground';
 import DarkModeToggle from '../components/DarkModeToggle';
+import Navbar from '../components/Navbar';
 import { useTheme } from 'next-themes';
 import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
 
@@ -12,16 +13,19 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   
-  // Ensure component is mounted before accessing theme
   useEffect(() => {
     setMounted(true);
+    
+    // Prevent scroll restoration and ensure page starts at top
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    }
   }, []);
 
-  // Loading screen timer with smooth transition
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Short delay before showing main content
       setTimeout(() => setShowContent(true), 300);
     }, 250); 
 
@@ -29,8 +33,10 @@ export default function Home() {
   }, []);
   
   return (
-    <div className="relative min-h-screen">
-      {/* Solid Background */}
+    <div className="relative min-h-screen overflow-x-hidden" style={{
+      scrollbarWidth: 'none', /* Firefox */
+      msOverflowStyle: 'none', /* Internet Explorer 10+ */
+    }}>
       <div 
         className="fixed inset-0 -z-20"
         style={{
@@ -38,10 +44,11 @@ export default function Home() {
         }}
       />
       
-      {/* Always render Particle Background for smooth animation */}
       <ParticleBackground />
       
-      {/* Loading Screen with smooth fade only */}
+      {/* Navbar Component */}
+      <Navbar />
+      
       <div 
         className={`fixed inset-0 bg-black flex items-center justify-center z-50 transition-opacity duration-1000 ${
           isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -57,18 +64,16 @@ export default function Home() {
         </div>
       </div>
       
-             
+              
        <div 
          className={`transition-all duration-500 ${
            showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
          }`}
        >
-        {/* Dark Mode Toggle */}
         <DarkModeToggle />
         
-        {/* Landing Page - Exactly 100vh */}
-        <div className="h-screen w-full flex items-center justify-center relative z-10">
-          {/* Main Content */}
+        {/* Landing Page - Home Section */}
+        <div id="home" className="h-screen w-full flex items-center justify-center relative z-10">
           <main className="text-center z-20 px-4 max-w-4xl">
             <div className="space-y-4">
               <h1 
@@ -81,44 +86,100 @@ export default function Home() {
               </h1>
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto"></div>
               <p 
-                className="text-lg md:text-xl font-extralight tracking-widest uppercase"
+                className="text-xs md:text-sm font-extralight tracking-widest uppercase"
                 style={{ 
                   color: mounted && theme === 'dark' ? 'white' : 'black',
                   letterSpacing: '0.2em'
                 }}
               >
-                Full-Stack Developer
+                Mathetmatics and Computer Science Student @ University of Waterloo
+                 
               </p>
             </div>
           </main>
+
+          {/* Social Links - Only on Home Section */}
+          <div className="absolute left-8 bottom-8 z-30 flex flex-col space-y-4">
+            <a 
+              href="https://github.com/HethavGopal" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              <Github size={20} />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/hethav-gopal/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              <Linkedin size={20} />
+            </a>
+            <a 
+              href="mailto:your@email.com" 
+              className="hover:opacity-70 transition-opacity"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              <Mail size={20} />
+            </a>
+          </div>
+        </div>
+
+        {/* Placeholder sections for navigation */}
+        <div id="about" className="h-screen w-full flex items-center justify-center relative z-10">
+          <div className="text-center">
+            <h2 
+              className="text-3xl md:text-5xl font-thin tracking-wide"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              About Me
+            </h2>
+            <p 
+              className="text-lg md:text-xl font-extralight mt-4 max-w-2xl"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              Coming soon...
+            </p>
+          </div>
+        </div>
+
+        <div id="projects" className="h-screen w-full flex items-center justify-center relative z-10">
+          <div className="text-center">
+            <h2 
+              className="text-3xl md:text-5xl font-thin tracking-wide"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              Projects
+            </h2>
+            <p 
+              className="text-lg md:text-xl font-extralight mt-4 max-w-2xl"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              Coming soon...
+            </p>
+          </div>
+        </div>
+
+        <div id="contact" className="h-screen w-full flex items-center justify-center relative z-10">
+          <div className="text-center">
+            <h2 
+              className="text-3xl md:text-5xl font-thin tracking-wide"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              Contact
+            </h2>
+            <p 
+              className="text-lg md:text-xl font-extralight mt-4 max-w-2xl"
+              style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
+            >
+              Coming soon...
+            </p>
+          </div>
         </div>
         
-        {/* Social Links */}
-        <div className="fixed left-8 bottom-8 z-30 flex flex-col space-y-4">
-          <a 
-            href="https://github.com" 
-            className="hover:opacity-70 transition-opacity"
-            style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
-          >
-            <Github size={20} />
-          </a>
-          <a 
-            href="https://linkedin.com" 
-            className="hover:opacity-70 transition-opacity"
-            style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
-          >
-            <Linkedin size={20} />
-          </a>
-          <a 
-            href="mailto:your@email.com" 
-            className="hover:opacity-70 transition-opacity"
-            style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
-          >
-            <Mail size={20} />
-          </a>
-        </div>
-        
-        {/* Scroll Indicator */}
         <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
           <span 
             className="text-xs font-light tracking-wide"
