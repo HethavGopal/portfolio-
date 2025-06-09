@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 import profilePic from '../assets/samplee.jpg';
 
 export default function AboutSection() {
@@ -54,14 +55,30 @@ export default function AboutSection() {
              
               <div className="space-y-3 text-sm leading-relaxed">
                 <p className={`${isDark ? 'text-white/90' : 'text-black/90'}`}>
-                                 I'm a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. I build full-stack applications that are both useful and fun, and lately I've been really 
-                 interested in AI. When I'm not coding, I'm probably out playing soccer or Valorant (peaked Ascendant).
+                                 I'm a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. I'm currently looking for fall 2025 internships. When I'm not coding, I'm probably out playing soccer or Valorant (peaked Ascendant).
                 </p>
          
               </div>
             </div>
           </div>
         </div>
+
+
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
+        <span 
+          className="text-xs font-light tracking-wide"
+          style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
+        >
+          Continue
+        </span>
+        <ChevronDown 
+          size={16} 
+          className="animate-bounce"
+          style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
+        />
       </div>
     </div>
   );
