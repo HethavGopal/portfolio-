@@ -1,11 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 
 export default function Navbar() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Scroll event listener for navbar visibility
   useEffect(() => {
@@ -59,50 +66,74 @@ export default function Navbar() {
     }
   };
 
+  const isDark = mounted && theme === 'dark';
+
   return (
     <nav 
       className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ease-out ${
         showNavbar ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
       }`}
     >
-      <div className="flex items-center space-x-6 px-4 py-2 rounded-full backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl">
+      <div 
+        className={`flex items-center space-x-6 px-4 py-2 rounded-full backdrop-blur-md shadow-2xl ${
+          isDark 
+            ? 'bg-white/10 border border-white/20' 
+            : 'bg-black/10 border border-black/20'
+        }`}
+      >
         {/* Navigation Links */}
         <button 
           onClick={() => scrollToSection('home')}
-          className={`text-xs font-medium transition-all duration-300 cursor-pointer ${
+          className={`text-xs font-medium transition-all duration-300 cursor-pointer px-3 py-1 rounded-full ${
             activeSection === 'home' 
-              ? 'text-white bg-white/20 px-3 py-1 rounded-full' 
-              : 'text-white/90 hover:text-white'
+              ? isDark
+                ? 'text-white bg-white/20'
+                : 'text-black bg-black/20'
+              : isDark
+                ? 'text-white/90 hover:text-white'
+                : 'text-black/90 hover:text-black'
           }`}
         >
           Home
         </button>
         <button 
           onClick={() => scrollToSection('about')}
-          className={`text-xs font-medium transition-all duration-300 cursor-pointer ${
+          className={`text-xs font-medium transition-all duration-300 cursor-pointer px-3 py-1 rounded-full ${
             activeSection === 'about' 
-              ? 'text-white bg-white/20 px-3 py-1 rounded-full' 
-              : 'text-white/90 hover:text-white'
+              ? isDark
+                ? 'text-white bg-white/20'
+                : 'text-black bg-black/20'
+              : isDark
+                ? 'text-white/90 hover:text-white'
+                : 'text-black/90 hover:text-black'
           }`}
         >
           About
         </button>
         <button 
           onClick={() => scrollToSection('projects')}
-          className={`text-xs font-medium transition-all duration-300 cursor-pointer ${
+          className={`text-xs font-medium transition-all duration-300 cursor-pointer px-3 py-1 rounded-full ${
             activeSection === 'projects' 
-              ? 'text-white bg-white/20 px-3 py-1 rounded-full' 
-              : 'text-white/90 hover:text-white'
+              ? isDark
+                ? 'text-white bg-white/20'
+                : 'text-black bg-black/20'
+              : isDark
+                ? 'text-white/90 hover:text-white'
+                : 'text-black/90 hover:text-black'
           }`}
         >
           Projects
         </button>
         <button 
           onClick={() => scrollToSection('contact')}
-          className={`text-xs font-medium transition-all duration-300 cursor-pointer ${
+          className={`text-xs font-medium transition-all duration-300 cursor-pointer px-3 py-1 rounded-full ${
             activeSection === 'contact' 
-              ? 'text-white bg-white/20 px-3 py-1 rounded-full' 
-              : 'text-white/90 hover:text-white'
+              ? isDark
+                ? 'text-white bg-white/20'
+                : 'text-black bg-black/20'
+              : isDark
+                ? 'text-white/90 hover:text-white'
+                : 'text-black/90 hover:text-black'
           }`}
         >
           Contact

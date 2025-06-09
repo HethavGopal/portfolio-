@@ -115,7 +115,8 @@ const ParticleBackground = () => {
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        isDark: { value: theme === 'dark' ? 1.0 : 0.0 }
+        isDark: { value: theme === 'dark' ? 1.0 : 0.0 },
+        globalOpacity: { value: 1.0 }
       },
       vertexShader: `
         precision highp float;
@@ -151,6 +152,7 @@ const ParticleBackground = () => {
       fragmentShader: `
         precision highp float;
         uniform float isDark;
+        uniform float globalOpacity;
         varying vec3 vPos;
         varying float vPattern;
         varying float vGlow;
@@ -162,7 +164,7 @@ const ParticleBackground = () => {
           if (dist > 0.5) discard;
           
           // Pattern-based alpha with glow enhancement
-          float alpha = (1.0 - dist * 2.0) * (0.4 + vPattern * 0.6) * vGlow;
+          float alpha = (1.0 - dist * 2.0) * (0.4 + vPattern * 0.6) * vGlow * globalOpacity;
           
           if (isDark > 0.5) {
             // White dots with subtle blue glow in dark mode
@@ -182,7 +184,8 @@ const ParticleBackground = () => {
     const trailMaterial = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        isDark: { value: theme === 'dark' ? 1.0 : 0.0 }
+        isDark: { value: theme === 'dark' ? 1.0 : 0.0 },
+        globalOpacity: { value: 1.0 }
       },
       vertexShader: `
         precision highp float;
@@ -221,6 +224,7 @@ const ParticleBackground = () => {
       fragmentShader: `
         precision highp float;
         uniform float isDark;
+        uniform float globalOpacity;
         varying float vAlpha;
         varying float vProgress;
         
@@ -229,7 +233,7 @@ const ParticleBackground = () => {
           float dist = length(coord);
           if (dist > 0.5) discard;
           
-          float alpha = (1.0 - dist * 2.0) * vAlpha;
+          float alpha = (1.0 - dist * 2.0) * vAlpha * globalOpacity;
           
           if (isDark > 0.5) {
             // Subtle white trail particles
@@ -249,7 +253,8 @@ const ParticleBackground = () => {
       uniforms: {
         time: { value: 0 },
         isDark: { value: theme === 'dark' ? 1.0 : 0.0 },
-        spherePosition: { value: new THREE.Vector3(0, 0, 0) }
+        spherePosition: { value: new THREE.Vector3(0, 0, 0) },
+        globalOpacity: { value: 1.0 }
       },
       vertexShader: `
         precision highp float;
@@ -287,6 +292,7 @@ const ParticleBackground = () => {
       fragmentShader: `
         precision highp float;
         uniform float isDark;
+        uniform float globalOpacity;
         varying float vAlpha;
         varying float vDistance;
         
@@ -295,7 +301,7 @@ const ParticleBackground = () => {
           float dist = length(coord);
           if (dist > 0.5) discard;
           
-          float alpha = (1.0 - dist * 2.0) * vAlpha;
+          float alpha = (1.0 - dist * 2.0) * vAlpha * globalOpacity;
           
           if (isDark > 0.5) {
             // Subtle white ambient particles
@@ -363,15 +369,15 @@ const ParticleBackground = () => {
       z: backScale.z * 0.92
     };
     pointsFront.scale.set(frontScale.x, frontScale.y, frontScale.z);
-    pointsFront.position.set(leftPosition, 0, 1); // Left side, in front of the text
+    pointsFront.position.set(leftPosition, 0, -2); // Move front particles behind content too
     
     // Position trail relative to the sphere
     trailPoints.scale.set(backScale.x, backScale.y, backScale.z);
-    trailPoints.position.set(leftPosition, 0, 0.5); // Between front and back layers
+    trailPoints.position.set(leftPosition, 0, -1.5); // Move trail behind content too
     
     // Position ambient particles to float around the sphere area
     ambientPoints.scale.set(backScale.x * 0.8, backScale.y * 0.8, backScale.z * 0.8);
-    ambientPoints.position.set(leftPosition, 0, -0.5); // Behind the main sphere
+    ambientPoints.position.set(leftPosition, 0, -3); // Further behind content
     
          // Make front particles much more transparent so text is readable
      // Override the fragment shader for front particles to be more transparent
@@ -468,13 +474,43 @@ const ParticleBackground = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Scroll-based zoom effect - maintains percentage-based sizing
+    // Scroll-based zoom effect and opacity reduction - maintains percentage-based sizing
     const handleScroll = () => {
       if (!pointsRef.current || !trailRef.current) return;
       
       const scrollY = window.scrollY;
       const maxScroll = 1000; // Adjust this value as needed
       const scrollProgress = Math.min(scrollY / maxScroll, 1);
+      
+      // Calculate opacity reduction when scrolling past home section
+      const homeHeight = window.innerHeight; // Assuming home section is full screen height
+      const fadeStartScroll = homeHeight * 0.3; // Start fading at 30% of home section
+      const fadeEndScroll = homeHeight * 0.8; // Fully faded at 80% of home section
+      
+      let opacity = 1.0;
+      if (scrollY > fadeStartScroll) {
+        if (scrollY >= fadeEndScroll) {
+          opacity = 0.65; // Minimum opacity for content sections (65% visibility)
+        } else {
+          // Linear fade from 1.0 to 0.65
+          const fadeProgress = (scrollY - fadeStartScroll) / (fadeEndScroll - fadeStartScroll);
+          opacity = 1.0 - (fadeProgress * 0.35); // Fade from 1.0 to 0.65
+        }
+      }
+      
+             // Apply opacity to all particle systems via shader uniforms
+       if (pointsRef.current.back && pointsRef.current.back.material.uniforms) {
+         pointsRef.current.back.material.uniforms.globalOpacity.value = opacity;
+       }
+       if (pointsRef.current.front && pointsRef.current.front.material.uniforms) {
+         pointsRef.current.front.material.uniforms.globalOpacity.value = opacity * 0.5; // Front particles even more transparent
+       }
+       if (trailRef.current && trailRef.current.material.uniforms) {
+         trailRef.current.material.uniforms.globalOpacity.value = opacity * 0.7; // Trail particles moderately transparent
+       }
+       if (ambientPoints && ambientPoints.material.uniforms) {
+         ambientPoints.material.uniforms.globalOpacity.value = opacity * 0.3; // Ambient particles very transparent
+       }
       
       // Get base responsive scale
       const { scale: baseResponsiveScale } = getResponsiveValues();
@@ -555,11 +591,12 @@ const ParticleBackground = () => {
   return (
     <div 
       ref={mountRef} 
-      className="fixed inset-0 -z-10"
+      className="fixed inset-0 -z-20"
       style={{
         width: '100vw',
         height: '100vh',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        pointerEvents: 'none'
       }}
     />
   );
