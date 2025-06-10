@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
+import { Mail, Github, Linkedin, Twitter, Calendar, Briefcase } from 'lucide-react';
 
 export default function ContactSection() {
   const { theme } = useTheme();
@@ -11,21 +12,138 @@ export default function ContactSection() {
     setMounted(true);
   }, []);
 
+  const isDark = mounted && theme === 'dark';
+
   return (
-    <div id="contact" className="h-screen w-full flex items-center justify-center relative z-10">
-      <div className="text-center">
-        <h2 
-          className="text-3xl md:text-5xl font-thin tracking-wide"
-          style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
-        >
-          Contact
-        </h2>
-        <p 
-          className="text-lg md:text-xl font-extralight mt-4 max-w-2xl"
-          style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
-        >
-          Coming soon...
-        </p>
+    <div id="contact" className="h-screen w-full relative z-10 flex items-center justify-center">
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 
+            className="text-3xl md:text-4xl font-thin tracking-wide"
+            style={{ color: isDark ? 'white' : 'black' }}
+          >
+            Let's Connect
+          </h2>
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto mt-4"></div>
+        </div>
+
+        {/* Social Links */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto mb-16">
+          <a 
+            href="mailto:your.email@example.com"
+            className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
+              isDark 
+                ? 'bg-white/5 border-white/10 hover:bg-white/10' 
+                : 'bg-black/5 border-black/10 hover:bg-black/10'
+            }`}
+          >
+            <div className={`p-3 rounded-full ${
+              isDark 
+                ? 'bg-white/10 group-hover:bg-white/20' 
+                : 'bg-black/10 group-hover:bg-black/20'
+            } transition-all duration-300`}>
+              <Mail size={20} className={isDark ? 'text-white' : 'text-black'} />
+            </div>
+            <span className={`text-sm font-medium ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+              Email
+            </span>
+          </a>
+
+          <a 
+            href="https://github.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
+              isDark 
+                ? 'bg-white/5 border-white/10 hover:bg-white/10' 
+                : 'bg-black/5 border-black/10 hover:bg-black/10'
+            }`}
+          >
+            <div className={`p-3 rounded-full ${
+              isDark 
+                ? 'bg-white/10 group-hover:bg-white/20' 
+                : 'bg-black/10 group-hover:bg-black/20'
+            } transition-all duration-300`}>
+              <Github size={20} className={isDark ? 'text-white' : 'text-black'} />
+            </div>
+            <span className={`text-sm font-medium ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+              GitHub
+            </span>
+          </a>
+
+          <a 
+            href="https://linkedin.com/in/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
+              isDark 
+                ? 'bg-white/5 border-white/10 hover:bg-white/10' 
+                : 'bg-black/5 border-black/10 hover:bg-black/10'
+            }`}
+          >
+            <div className={`p-3 rounded-full ${
+              isDark 
+                ? 'bg-white/10 group-hover:bg-white/20' 
+                : 'bg-black/10 group-hover:bg-black/20'
+            } transition-all duration-300`}>
+              <Linkedin size={20} className={isDark ? 'text-white' : 'text-black'} />
+            </div>
+            <span className={`text-sm font-medium ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+              LinkedIn
+            </span>
+          </a>
+
+          <a 
+            href="https://twitter.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
+              isDark 
+                ? 'bg-white/5 border-white/10 hover:bg-white/10' 
+                : 'bg-black/5 border-black/10 hover:bg-black/10'
+            }`}
+          >
+            <div className={`p-3 rounded-full ${
+              isDark 
+                ? 'bg-white/10 group-hover:bg-white/20' 
+                : 'bg-black/10 group-hover:bg-black/20'
+            } transition-all duration-300`}>
+              <Twitter size={20} className={isDark ? 'text-white' : 'text-black'} />
+            </div>
+            <span className={`text-sm font-medium ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+              Twitter
+            </span>
+          </a>
+        </div>
+
+        {/* Additional Info */}
+        <div className="max-w-md mx-auto">
+          <div className={`p-4 rounded-xl backdrop-blur-sm border ${
+            isDark 
+              ? 'bg-white/5 border-white/10' 
+              : 'bg-black/5 border-black/10'
+          }`}>
+            <div className="flex items-start gap-3">
+              <div className={`p-2 rounded-full ${
+                isDark 
+                  ? 'bg-white/10' 
+                  : 'bg-black/10'
+              }`}>
+                <Briefcase size={18} className={isDark ? 'text-white' : 'text-black'} />
+              </div>
+              <div>
+                <h3 className={`text-lg font-medium mb-2 ${isDark ? 'text-white' : 'text-black'}`}>
+                  Looking For
+                </h3>
+                <p className={`${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                  Fall 2025 and Summer 2026<br />
+                  Internships
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

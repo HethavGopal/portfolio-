@@ -8,6 +8,7 @@ import HomeSection from '../components/HomeSection';
 import AboutSection from '../components/AboutSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
+import Footer from '../components/Footer';
 import { useTheme } from 'next-themes';
 
 export default function Home() {
@@ -80,6 +81,7 @@ export default function Home() {
         <AboutSection />
         <ProjectsSection />
         <ContactSection />
+        <Footer />
       </div>
     </div>
   );

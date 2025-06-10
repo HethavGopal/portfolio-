@@ -74,11 +74,11 @@ export default function ProjectsSection() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-4 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 justify-items-center">
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className="group relative transition-all duration-300 hover:scale-[1.02] w-full max-w-sm"
+              className="group relative transition-all duration-300 hover:scale-[1.02] w-full max-w-[600px]"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >

@@ -17,7 +17,7 @@ export default function AboutSection() {
   const isDark = mounted && theme === 'dark';
 
   return (
-    <div id="about" className="min-h-screen w-full flex items-center justify-center relative z-10 py-16">
+    <div id="about" className="h-screen w-full flex items-center justify-center relative z-10">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -52,18 +52,14 @@ export default function AboutSection() {
           {/* Right Column - Description */}
           <div className="space-y-4">
             <div>
-             
               <div className="space-y-3 text-sm leading-relaxed">
                 <p className={`${isDark ? 'text-white/90' : 'text-black/90'}`}>
-                                 I'm a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. I'm currently looking for fall 2025 internships. When I'm not coding, I'm probably out playing soccer or Valorant (peaked Ascendant).
+                  I'm a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. I'm currently looking for fall 2025 internships. When I'm not coding, I'm probably out playing soccer or Valorant (peaked Ascendant).
                 </p>
-         
               </div>
             </div>
           </div>
         </div>
-
-
       </div>
 
       {/* Scroll Indicator */}
