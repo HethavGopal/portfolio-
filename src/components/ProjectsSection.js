@@ -6,7 +6,7 @@ import { ChevronDown, ExternalLink, Github } from 'lucide-react';
 import Image from 'next/image';
 import vettAI from '../assets/vettAI.png';
 import uwbookhub from '../assets/UWHub.png';
-import forecast from '../assets/Forecast.png';
+import forecast from '../assets/forecast.png';
 import nexight from '../assets/nexight.png';
 
 const projects = [
