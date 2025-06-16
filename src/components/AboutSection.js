@@ -54,8 +54,8 @@ export default function AboutSection() {
             <div>
               <div className="space-y-3 text-sm leading-relaxed">
                 <p className={`${isDark ? 'text-white/90' : 'text-black/90'}`}>
-                  I'm a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. 
-                  I'm currently looking for fall 2025 internships. When I'm not coding, I'm probably out playing soccer or Valorant.
+                  I&apos;m a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. 
+                  I&apos;m currently looking for fall 2025 internships. When I&apos;m not coding, I&apos;m probably out playing soccer or Valorant.
                 </p>
               </div>
             </div>

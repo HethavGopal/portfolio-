@@ -23,7 +23,7 @@ export default function ContactSection() {
             className="text-3xl md:text-4xl font-thin tracking-wide"
             style={{ color: isDark ? 'white' : 'black' }}
           >
-            Let's Connect
+            Let&apos;s Connect
           </h2>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto mt-4"></div>
         </div>

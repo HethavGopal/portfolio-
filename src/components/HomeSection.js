@@ -22,7 +22,7 @@ export default function HomeSection() {
               color: mounted && theme === 'dark' ? 'white' : 'black'
             }}
           >
-            Hi, I'm Hethav Gopal
+            Hi, I&apos;m Hethav Gopal
           </h1>
           <div className="w-16 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto"></div>
           <p 
