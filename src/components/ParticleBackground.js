@@ -36,8 +36,14 @@ const ParticleBackground = () => {
     renderer.setClearColor(0x000000, 0);
     mountRef.current.appendChild(renderer.domElement);
 
+    // Responsive particle counts and position for mobile
+    const isMobile = window.innerWidth < 768;
+    // Lower density for mobile
+    const POINT_COUNT = isMobile ? 3500 : 18000;
+    const AMBIENT_COUNT = isMobile ? 500 : 3000;
+    const TRAIL_COUNT = isMobile ? 800 : 6000;
+
     // Create dot sphere geometry
-    const POINT_COUNT = 18000; // Reduced from 35000 for less density
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(POINT_COUNT * 3);
     
@@ -55,7 +61,6 @@ const ParticleBackground = () => {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     // Create ambient floating particles
-    const AMBIENT_COUNT = 3000;
     const ambientGeometry = new THREE.BufferGeometry();
     const ambientPositions = new Float32Array(AMBIENT_COUNT * 3);
     const ambientVelocities = new Float32Array(AMBIENT_COUNT * 3);
@@ -83,7 +88,6 @@ const ParticleBackground = () => {
     ambientGeometry.setAttribute('lifetime', new THREE.BufferAttribute(ambientLifetimes, 1));
 
     // Create trailing particles geometry
-    const TRAIL_COUNT = 6000; // Reduced for subtlety
     const trailGeometry = new THREE.BufferGeometry();
     const trailPositions = new Float32Array(TRAIL_COUNT * 3);
     const trailVelocities = new Float32Array(TRAIL_COUNT * 3);
@@ -547,6 +551,18 @@ const ParticleBackground = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
 
+    // Move particles towards the top on mobile
+    if (isMobile) {
+      camera.position.set(0, 2.2, 4); // Move camera further up
+    }
+    // For mobile, move all particle groups further up
+    if (isMobile) {
+      pointsBack.position.y += 2.2;
+      pointsFront.position.y += 2.2;
+      trailPoints.position.y += 2.2;
+      ambientPoints.position.y += 2.2;
+    }
+
     // Cleanup function
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -588,17 +604,27 @@ const ParticleBackground = () => {
     }
   }, [theme]);
 
+  // Add a style tag for mobile canvas positioning
+  if (typeof window !== 'undefined') {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @media (max-width: 767px) {
+        .particle-bg-canvas {
+          position: absolute !important;
+          top: 0 !important;
+          left: 0;
+          width: 100vw !important;
+          height: 50vh !important;
+          pointer-events: none;
+          z-index: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   return (
-    <div 
-      ref={mountRef} 
-      className="fixed inset-0 -z-20"
-      style={{
-        width: '100vw',
-        height: '100vh',
-        overflow: 'hidden',
-        pointerEvents: 'none'
-      }}
-    />
+    <div ref={mountRef} className="particle-bg-canvas" style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }} />
   );
 };
 

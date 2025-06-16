@@ -79,7 +79,7 @@ export default function ProjectsSection() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16 justify-items-center">
           {projects.map((project, index) => (
             <div
               key={project.id}
@@ -334,7 +334,7 @@ export default function ProjectsSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
         <span 
           className="text-xs font-light tracking-wide"
           style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
