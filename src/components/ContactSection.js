@@ -96,7 +96,7 @@ export default function ContactSection() {
         </div>
 
         {/* Additional Info */}
-        <div className="mt-12 flex justify-center">
+        <div className="mt-12 flex justify-center mb-32 md:mb-0">
           <div className={`p-4 rounded-xl backdrop-blur-sm border ${
             isDark 
               ? 'bg-white/5 border-white/10' 
