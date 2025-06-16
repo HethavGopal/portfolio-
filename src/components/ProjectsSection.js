@@ -3,47 +3,52 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { ChevronDown, ExternalLink, Github } from 'lucide-react';
+import Image from 'next/image';
+import vettAI from '../assets/vettAI.png';
+import uwbookhub from '../assets/UWHub.png';
+import forecast from '../assets/Forecast.png';
+import nexight from '../assets/nexight.png';
 
 const projects = [
   {
     id: 1,
-    title: "Sandbox",
-    description: "AI-powered, collaborative code editor (1400+ stars)",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop&crop=entropy&cs=tinysrgb",
-    technologies: ["React", "Node.js", "WebRTC", "Monaco Editor"],
+    title: "VettAI",
+    description: "AI-powered mock interview platform with real-time voice interaction and instant feedback for technical interviews",
+    image: vettAI,
+    technologies: ["Next.js", "React", "TailwindCSS", "Vapi API", "Firebase"],
     year: "2024",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    github: "https://github.com/HethavGopal/vettai",
+    demo: "https://ai-interview-ten-ruby.vercel.app"
   },
   {
     id: 2,
-    title: "Arceus",
-    description: "Distributed training marketplace to democratize large AI models",
-    image: "https://images.unsplash.com/photo-1518186233392-c232efbf2373?w=800&h=600&fit=crop&crop=entropy&cs=tinysrgb",
-    technologies: ["Python", "PyTorch", "Docker", "Kubernetes"],
+    title: "UWBookHub",
+    description: "Full-stack textbook marketplace for UWaterloo students with peer-to-peer transactions",
+    image: uwbookhub,
+    technologies: ["React", "Node.js", "MongoDB", "Firebase", "Docker"],
     year: "2024",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    github: "https://github.com/HethavGopal/UWBookHubNew",
+    demo: "https://uwmarketplace.vercel.app/"
   },
   {
     id: 3,
-    title: "General Agents",
-    description: "Product engineering, general-purpose computer control agents",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=600&fit=crop&crop=entropy&cs=tinysrgb",
-    technologies: ["Python", "OpenAI API", "Selenium", "Computer Vision"],
+    title: "Nexight AI",
+    description: "AI-powered business automation tools for local businesses offering intelligent chatbots, lead generation etc...",
+    image: nexight,
+    technologies: ["Next.js", "React", "TailwindCSS", "OpenAI", "Node.js"],
     year: "2024",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    github: "https://github.com/HethavGopal/nexight",
+    demo: "https://nexightai.com"
   },
   {
     id: 4,
-    title: "Axiom",
-    description: "IDE for UWaterloo's formal proofs programming language",
-    image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=600&fit=crop&crop=entropy&cs=tinysrgb",
-    technologies: ["TypeScript", "LSP", "Tree-sitter", "Electron"],
+    title: "ForeCast Analytics",
+    description: "Interactive analytics dashboard for real-time sales data visualization and revenue forecasting",
+    image: forecast,
+    technologies: ["React", "Flask", "Chart.js", "NextUI", "TensorFlow"],
     year: "2024",
-    github: "https://github.com",
-    demo: "https://demo.com"
+    github: "https://github.com/HethavGopal/ForeCast",
+    demo: ""
   }
 ];
 
@@ -85,11 +90,187 @@ export default function ProjectsSection() {
               
               {/* Project Image */}
               <div className="relative overflow-hidden rounded-lg mb-4 aspect-video">
-                <img
+                {project.id !== 4 ? (
+                  <Image
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                    priority={index === 0}
+                    quality={95}
+                    fill
+                  />
+                ) : (
+                  <div className="w-full h-full bg-[#0F172A] p-3 flex flex-col">
+                    {/* Top Navigation */}
+                    <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-800/50">
+                      <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-2 px-2 py-1 rounded-md bg-green-500/10 border border-green-500/20">
+                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                          <span className="text-[11px] font-medium text-green-500">LIVE</span>
+                        </div>
+                        <div className="h-4 w-px bg-gray-800"></div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-[11px] text-gray-400">Refresh Rate:</span>
+                          <span className="text-[11px] text-gray-200">30s</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-2 text-[11px]">
+                          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                          <span className="text-gray-400">Last Update:</span>
+                          <span className="text-gray-200 font-medium">2m ago</span>
+                        </div>
+                        <button className="w-6 h-6 rounded-md bg-gray-800/50 hover:bg-gray-800 transition-colors flex items-center justify-center">
+                          <div className="w-3.5 h-3.5 text-gray-400">⚙️</div>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Main Content Grid */}
+                    <div className="grid grid-cols-12 gap-3 flex-1">
+                      {/* Left Column - Main Chart */}
+                      <div className="col-span-8 bg-gray-800/20 rounded-xl p-3 backdrop-blur-sm border border-gray-700/30">
+                        <div className="flex justify-between items-start mb-4">
+                          <div>
+                            <h3 className="text-sm font-medium bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Revenue Forecast</h3>
+                            <div className="flex items-center mt-1">
+                              <p className="text-[11px] text-gray-400">30-day projection</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-2 px-2 py-1 rounded-md bg-gray-800/50">
+                              <div className="flex items-center space-x-1">
+                                <div className="w-1.5 h-1.5 bg-green-500/70 rounded-full"></div>
+                                <span className="text-[11px] text-gray-300">Actual</span>
+                              </div>
+                              <div className="h-3 w-px bg-gray-700"></div>
+                              <div className="flex items-center space-x-1">
+                                <div className="w-1.5 h-1.5 bg-blue-500/70 rounded-full"></div>
+                                <span className="text-[11px] text-gray-300">Predicted</span>
+                              </div>
+                            </div>
+                            <button className="w-6 h-6 rounded-md bg-gray-800/50 hover:bg-gray-800 transition-colors flex items-center justify-center">
+                              <div className="w-3.5 h-3.5 text-gray-400">↗️</div>
+                            </button>
+                          </div>
+                        </div>
+                        
+                        {/* Chart Area */}
+                        <div className="relative">
+                          <div className="absolute -left-2 top-0 bottom-0 flex flex-col justify-between text-[10px] text-gray-500">
+                            <span>$20K</span>
+                            <span>$15K</span>
+                            <span>$10K</span>
+                            <span>$5K</span>
+                          </div>
+                          <div className="h-[140px] ml-8 grid grid-cols-24 gap-1 items-end">
+                            {Array(24).fill(0).map((_, i) => (
+                              <div key={i} className="relative h-full">
+                                <div 
+                                  className={i < 14 ? 'bg-green-500/20' : 'bg-blue-500/20'}
+                                  style={{ 
+                                    height: `${40 + Math.sin(i/3) * 15}%`,
+                                    width: '100%',
+                                    borderRadius: '2px'
+                                  }}
+                                >
+                                  <div 
+                                    className={i < 14 ? 'bg-green-500' : 'bg-blue-500'}
+                                    style={{ 
+                                      height: '60%',
+                                      width: '100%',
+                                      position: 'absolute',
+                                      bottom: 0,
+                                      opacity: 0.3,
+                                      borderRadius: '2px'
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="ml-8 mt-2 grid grid-cols-24 gap-1">
+                            {Array(24).fill(0).map((_, i) => (
+                              <div key={i} className="text-center text-[9px] text-gray-500">
+                                {i + 1}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right Column - Stats */}
+                      <div className="col-span-4 space-y-3">
+                        {/* Top Stats */}
+                        <div className="bg-gray-800/20 rounded-xl p-3 backdrop-blur-sm border border-gray-700/30">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="text-[11px] text-gray-400">Current Revenue</div>
+                            <div className="px-1.5 py-0.5 rounded-full bg-green-500/10 border border-green-500/20">
+                              <span className="text-[10px] text-green-400">+18.5%</span>
+                            </div>
+                          </div>
+                          <div className="text-xl font-semibold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+                            $17,293
+                          </div>
+                          <div className="flex items-center mt-2">
+                            <div className="text-[11px] text-gray-400">vs last month:</div>
+                            <div className="text-[11px] text-green-400 ml-1">+$2,685</div>
+                          </div>
+                        </div>
+
+                        {/* Middle Stats */}
+                        <div className="bg-gray-800/20 rounded-xl p-3 backdrop-blur-sm border border-gray-700/30">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="text-[11px] text-gray-400">Forecast Accuracy</div>
+                            <div className="text-[11px] text-blue-400">High</div>
+                          </div>
+                          <div className="flex items-end space-x-1">
+                            <div className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">96%</div>
+                          </div>
+                          <div className="w-full h-1 bg-gray-800 rounded-full mt-2 overflow-hidden">
+                            <div 
+                              className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-500"
+                              style={{ width: '96%' }}
+                            ></div>
+                          </div>
+                        </div>
+
+                        {/* Bottom Stats */}
+                        <div className="bg-gray-800/20 rounded-xl p-3 backdrop-blur-sm border border-gray-700/30">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="text-[11px] text-gray-400">Top Products</div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="p-2 rounded-md bg-gray-800/50">
+                              <div className="flex justify-between items-center">
+                                <div className="flex items-center space-x-2">
+                                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                                  <div className="text-[11px] text-gray-200">Product A</div>
+                                </div>
+                                <div className="text-[11px] text-green-400">+$8.5k</div>
+                              </div>
+                              <div className="mt-1 w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                <div className="h-full rounded-full bg-green-500/30" style={{ width: '85%' }}></div>
+                              </div>
+                            </div>
+                            <div className="p-2 rounded-md bg-gray-800/50">
+                              <div className="flex justify-between items-center">
+                                <div className="flex items-center space-x-2">
+                                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                                  <div className="text-[11px] text-gray-200">Product B</div>
+                                </div>
+                                <div className="text-[11px] text-blue-400">+$6.2k</div>
+                              </div>
+                              <div className="mt-1 w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                <div className="h-full rounded-full bg-blue-500/30" style={{ width: '65%' }}></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 
                 {/* Overlay on hover */}
                 <div className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${

@@ -58,7 +58,7 @@ export default function HomeSection() {
           <Linkedin size={20} />
         </a>
         <a 
-          href="mailto:hgopal@uwaterloo.ca" 
+          href="mailto:hethava.v@gmail.com" 
           className="hover:opacity-70 transition-opacity"
           style={{ color: mounted && theme === 'dark' ? 'white' : 'black' }}
         >

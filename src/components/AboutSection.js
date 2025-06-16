@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
-import profilePic from '../assets/samplee.jpg';
+import profilePic from '../assets/self-main1.png';
 
 export default function AboutSection() {
   const { theme } = useTheme();
@@ -54,7 +54,8 @@ export default function AboutSection() {
             <div>
               <div className="space-y-3 text-sm leading-relaxed">
                 <p className={`${isDark ? 'text-white/90' : 'text-black/90'}`}>
-                  I'm a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. I'm currently looking for fall 2025 internships. When I'm not coding, I'm probably out playing soccer or Valorant (peaked Ascendant).
+                  I'm a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. 
+                  I'm currently looking for fall 2025 internships. When I'm not coding, I'm probably out playing soccer or Valorant.
                 </p>
               </div>
             </div>

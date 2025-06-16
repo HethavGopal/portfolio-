@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Mail, Github, Linkedin, Twitter, Calendar, Briefcase } from 'lucide-react';
+import { Mail, Github, Linkedin, Calendar, Briefcase } from 'lucide-react';
 
 export default function ContactSection() {
   const { theme } = useTheme();
@@ -29,9 +29,9 @@ export default function ContactSection() {
         </div>
 
         {/* Social Links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <a 
-            href="mailto:your.email@example.com"
+            href="mailto:hethava.v@gmail.com"
             className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
               isDark 
                 ? 'bg-white/5 border-white/10 hover:bg-white/10' 
@@ -51,7 +51,7 @@ export default function ContactSection() {
           </a>
 
           <a 
-            href="https://github.com/yourusername"
+            href="https://github.com/HethavGopal"
             target="_blank"
             rel="noopener noreferrer"
             className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
@@ -73,7 +73,7 @@ export default function ContactSection() {
           </a>
 
           <a 
-            href="https://linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/hethav-gopal/"
             target="_blank"
             rel="noopener noreferrer"
             className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
@@ -93,32 +93,10 @@ export default function ContactSection() {
               LinkedIn
             </span>
           </a>
-
-          <a 
-            href="https://twitter.com/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
-              isDark 
-                ? 'bg-white/5 border-white/10 hover:bg-white/10' 
-                : 'bg-black/5 border-black/10 hover:bg-black/10'
-            }`}
-          >
-            <div className={`p-3 rounded-full ${
-              isDark 
-                ? 'bg-white/10 group-hover:bg-white/20' 
-                : 'bg-black/10 group-hover:bg-black/20'
-            } transition-all duration-300`}>
-              <Twitter size={20} className={isDark ? 'text-white' : 'text-black'} />
-            </div>
-            <span className={`text-sm font-medium ${isDark ? 'text-white/70' : 'text-black/70'}`}>
-              Twitter
-            </span>
-          </a>
         </div>
 
         {/* Additional Info */}
-        <div className="max-w-md mx-auto">
+        <div className="mt-12 flex justify-center">
           <div className={`p-4 rounded-xl backdrop-blur-sm border ${
             isDark 
               ? 'bg-white/5 border-white/10' 

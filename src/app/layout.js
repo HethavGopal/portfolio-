@@ -15,6 +15,19 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Hethav Gopal - Full-Stack Developer",
   description: "Full-Stack Developer / AI + Web Enthusiast",
+  icons: {
+    icon: [
+      {
+        url: '/favicon.ico',
+        sizes: '32x32',
+        type: 'image/x-icon',
+      },
+      {
+        url: '/favicon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {
