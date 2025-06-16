@@ -15,7 +15,7 @@ export default function ContactSection() {
   const isDark = mounted && theme === 'dark';
 
   return (
-    <div id="contact" className="h-screen w-full relative z-10 flex items-center justify-center">
+    <div id="contact" className="w-full relative z-10 flex justify-center">
       <div className="max-w-4xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
