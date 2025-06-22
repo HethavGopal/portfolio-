@@ -28,7 +28,7 @@ const projects = [
     technologies: ["React", "Node.js", "MongoDB", "Firebase", "Docker"],
     year: "2024",
     github: "https://github.com/HethavGopal/UWBookHubNew",
-    demo: "https://uwmarketplace.vercel.app/"
+    demo: "https://uwbookhub.vercel.app/"
   },
   {
     id: 3,
