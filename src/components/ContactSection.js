@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { Mail, Github, Linkedin, Calendar, Briefcase } from 'lucide-react';
+import ScrollFadeIn from './ScrollFadeIn';
 
 export default function ContactSection() {
   const { theme } = useTheme();
@@ -18,18 +19,21 @@ export default function ContactSection() {
     <div id="contact" className="w-full relative z-10 flex justify-center pt-24 pb-24">
       <div className="max-w-4xl mx-auto px-6 pb-24">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 
-            className="text-3xl md:text-4xl font-thin tracking-wide"
-            style={{ color: isDark ? 'white' : 'black' }}
-          >
-            Let&apos;s Connect
-          </h2>
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto mt-4"></div>
-        </div>
+        <ScrollFadeIn delay={0.1}>
+          <div className="text-center mb-16">
+            <h2 
+              className="text-3xl md:text-4xl font-thin tracking-wide"
+              style={{ color: isDark ? 'white' : 'black' }}
+            >
+              Let&apos;s Connect
+            </h2>
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto mt-4"></div>
+          </div>
+        </ScrollFadeIn>
 
         {/* Social Links */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <ScrollFadeIn delay={0.3}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <a 
             href="mailto:hethava.v@gmail.com"
             className={`group p-4 rounded-xl backdrop-blur-sm border flex flex-col items-center gap-2 transition-all duration-300 ${
@@ -93,10 +97,12 @@ export default function ContactSection() {
               LinkedIn
             </span>
           </a>
-        </div>
+          </div>
+        </ScrollFadeIn>
 
         {/* Additional Info */}
-        <div className="mt-12 flex justify-center">
+        <ScrollFadeIn delay={0.5}>
+          <div className="mt-12 flex justify-center">
           <div className={`p-4 rounded-xl backdrop-blur-sm border ${
             isDark 
               ? 'bg-white/5 border-white/10' 
@@ -115,13 +121,14 @@ export default function ContactSection() {
                   Looking For
                 </h3>
                 <p className={`${isDark ? 'text-white/70' : 'text-black/70'}`}>
-                  Fall 2025 and Summer 2026<br />
+                  Winter and Summer 2026 <br />
                   Internships
                 </p>
               </div>
             </div>
           </div>
-        </div>
+          </div>
+        </ScrollFadeIn>
       </div>
     </div>
   );

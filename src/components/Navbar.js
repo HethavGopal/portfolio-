@@ -43,6 +43,8 @@ export default function Navbar() {
       } else if (scrollPosition < windowHeight * 1.5) {
         currentSection = 'about';
       } else if (scrollPosition < windowHeight * 2.5) {
+        currentSection = 'experience';
+      } else if (scrollPosition < windowHeight * 3.5) {
         currentSection = 'projects';
       } else {
         currentSection = 'contact';
@@ -109,6 +111,20 @@ export default function Navbar() {
           }`}
         >
           About
+        </button>
+        <button 
+          onClick={() => scrollToSection('experience')}
+          className={`text-xs font-medium transition-all duration-300 cursor-pointer px-3 py-1 rounded-full ${
+            activeSection === 'experience' 
+              ? isDark
+                ? 'text-white bg-white/20'
+                : 'text-black bg-black/20'
+              : isDark
+                ? 'text-white/90 hover:text-white'
+                : 'text-black/90 hover:text-black'
+          }`}
+        >
+          Experience
         </button>
         <button 
           onClick={() => scrollToSection('projects')}

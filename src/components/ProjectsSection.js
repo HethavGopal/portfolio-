@@ -8,6 +8,8 @@ import vettAI from '../assets/vettAI.png';
 import uwbookhub from '../assets/UWHub.png';
 import forecast from '../assets/forecast.png';
 import nexight from '../assets/nexight.png';
+import ScrollFadeIn from './ScrollFadeIn';
+import { MagicCard } from '../registry/magicui/magic-card';
 
 const projects = [
   {
@@ -64,29 +66,37 @@ export default function ProjectsSection() {
   const isDark = mounted && theme === 'dark';
 
   return (
-    <div id="projects" className="min-h-screen w-full relative z-10 py-20">
+    <div id="projects" className="min-h-screen w-full relative z-10 py-10">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 
-            className="text-3xl md:text-4xl font-thin tracking-wide"
-            style={{ color: isDark ? 'white' : 'black' }}
-          >
-            Projects
-          </h2>
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto mt-4"></div>
-        </div>
+        <ScrollFadeIn delay={0.1}>
+          <div className="text-center mb-16">
+            <h2 
+              className="text-3xl md:text-4xl font-thin tracking-wide"
+              style={{ color: isDark ? 'white' : 'black' }}
+            >
+              Projects
+            </h2>
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto mt-4"></div>
+          </div>
+        </ScrollFadeIn>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16 justify-items-center">
           {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className="group relative transition-all duration-300 hover:scale-[1.02] w-full max-w-[600px]"
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
-            >
+            <ScrollFadeIn key={project.id} delay={0.3 + (index * 0.15)}>
+              <MagicCard
+                className={`group relative transition-all duration-300 hover:scale-[1.02] w-full max-w-[600px] p-6 backdrop-blur-xl ${
+                  isDark 
+                    ? 'bg-black/20 border-white/10' 
+                    : 'bg-white/20 border-black/10'
+                } border`}
+                gradientColor={isDark ? "#262626" : "#D9D9D955"}
+                gradientOpacity={0.8}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
               
               {/* Project Image */}
               <div className="relative overflow-hidden rounded-lg mb-4 aspect-video">
@@ -328,24 +338,27 @@ export default function ProjectsSection() {
                   ))}
                 </div>
               </div>
-            </div>
+              </MagicCard>
+            </ScrollFadeIn>
           ))}
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
-        <span 
-          className="text-xs font-light tracking-wide"
-          style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
-        >
-          Contact
-        </span>
-        <ChevronDown 
-          size={16} 
-          className="animate-bounce"
-          style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
-        />
+      <div className="text-center mt-24 mb-8">
+        <div className="flex flex-col items-center space-y-2">
+          <span 
+            className="text-xs font-light tracking-wide"
+            style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
+          >
+            Contact
+          </span>
+          <ChevronDown 
+            size={16} 
+            className="animate-bounce"
+            style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
+          />
+        </div>
       </div>
     </div>
   );

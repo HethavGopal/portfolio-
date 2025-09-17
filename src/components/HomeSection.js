@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { ChevronDown, Github, Linkedin, Mail, Instagram } from 'lucide-react';
+import ScrollFadeIn from './ScrollFadeIn';
 
 export default function HomeSection() {
   const { theme } = useTheme();
@@ -16,29 +17,37 @@ export default function HomeSection() {
     <div id="home" className="h-screen w-full flex items-center justify-center relative z-10">
       <main className="text-center z-20 px-4 max-w-4xl">
         <div className="space-y-4">
-          <h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-thin tracking-wide leading-tight"
-            style={{ 
-              color: mounted && theme === 'dark' ? 'white' : 'black'
-            }}
-          >
-            Hi, I&apos;m Hethav Gopal
-          </h1>
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto"></div>
-          <p 
-            className="text-xs md:text-sm font-extralight tracking-widest uppercase"
-            style={{ 
-              color: mounted && theme === 'dark' ? 'white' : 'black',
-              letterSpacing: '0.2em'
-            }}
-          >
-            Mathematics and Computer Science Student @ University of Waterloo
-          </p>
+          <ScrollFadeIn delay={0.1}>
+            <h1 
+              className="text-4xl md:text-6xl lg:text-7xl font-thin tracking-wide leading-tight"
+              style={{ 
+                color: mounted && theme === 'dark' ? 'white' : 'black'
+              }}
+            >
+              Hi, I&apos;m Hethav Gopal
+            </h1>
+          </ScrollFadeIn>
+          
+          <ScrollFadeIn delay={0.3}>
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 mx-auto"></div>
+          </ScrollFadeIn>
+          
+          <ScrollFadeIn delay={0.5}>
+            <p 
+              className="text-xs md:text-sm font-extralight tracking-widest uppercase"
+              style={{ 
+                color: mounted && theme === 'dark' ? 'white' : 'black',
+                letterSpacing: '0.2em'
+              }}
+            >
+              Mathematics and Computer Science Student @ University of Waterloo
+            </p>
+          </ScrollFadeIn>
         </div>
       </main>
 
       {/* Social Links - Only on Home Section */}
-      <div className="absolute left-8 bottom-8 z-30 flex flex-col space-y-4">
+      <ScrollFadeIn delay={0.7} className="absolute left-8 bottom-8 z-30 flex flex-col space-y-4">
         <a 
           href="https://github.com/HethavGopal" 
           target="_blank"
@@ -73,10 +82,10 @@ export default function HomeSection() {
         >
           <Instagram size={20} />
         </a>
-      </div>
+      </ScrollFadeIn>
 
       {/* Scroll Indicator - Below Home Section */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
+      <ScrollFadeIn delay={0.9} className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center space-y-2">
         <span 
           className="text-xs font-light tracking-wide"
           style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
@@ -88,7 +97,7 @@ export default function HomeSection() {
           className="animate-bounce"
           style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
         />
-      </div>
+      </ScrollFadeIn>
     </div>
   );
 } 

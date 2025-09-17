@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
-import profilePic from '../assets/self-main1.png';
+import profilePic from '../assets/self-pic.jpg';
+import { TextAnimate } from '../registry/magicui/text-animate';
+import ScrollFadeIn from './ScrollFadeIn';
 
 export default function AboutSection() {
   const { theme } = useTheme();
@@ -34,7 +36,8 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           
           {/* Left Column - Image Container */}
-          <div className="relative">
+          <ScrollFadeIn delay={0.2}>
+            <div className="relative">
             <div className={`w-full aspect-square max-w-48 mx-auto rounded-full ${isDark ? 'bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20' : 'bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10'} flex items-center justify-center backdrop-blur-sm border ${isDark ? 'border-white/20' : 'border-black/20'} relative overflow-hidden`}>
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10"></div>
               <div className="relative w-full h-full rounded-full overflow-hidden z-10">
@@ -47,19 +50,21 @@ export default function AboutSection() {
                 />
               </div>
             </div>
-          </div>
+            </div>
+          </ScrollFadeIn>
 
           {/* Right Column - Description */}
-          <div className="space-y-4 text-center">
+          <ScrollFadeIn delay={0.2}>
+            <div className="space-y-4 text-center">
             <div>
               <div className="space-y-3 text-sm leading-relaxed">
                 <p className={`text-center ${isDark ? 'text-white/90' : 'text-black/90'}`}>
-                  I&apos;m a second year Math + CS student and full-stack developer based in <span className="text-gray-500 font-bold">Toronto</span>. 
-                  I&apos;m currently looking for fall 2025 internships. When I&apos;m not coding, I&apos;m probably out playing soccer or Valorant.
+                  I'm a second year Math + CS student and full-stack developer based in Toronto. I'm currently looking for Winter and Summer 2026 Internships in full stack development and ML. Feel free to contact me if you have any questions!
                 </p>
               </div>
             </div>
-          </div>
+            </div>
+          </ScrollFadeIn>
         </div>
       </div>
 
@@ -69,7 +74,7 @@ export default function AboutSection() {
           className="text-xs font-light tracking-wide"
           style={{ color: mounted && theme === 'dark' ? '#94a3b8' : '#64748b' }}
         >
-          Continue
+          Experience
         </span>
         <ChevronDown 
           size={16} 

@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import ParticleBackground from '../components/ParticleBackground';
-import DarkModeToggle from '../components/DarkModeToggle';
+import { AnimatedThemeToggler } from '../registry/magicui/animated-theme-toggler';
 import Navbar from '../components/Navbar';
 import HomeSection from '../components/HomeSection';
 import AboutSection from '../components/AboutSection';
+import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
@@ -68,17 +69,19 @@ export default function Home() {
         </div>
       </div>
       
-              
+      {/* Keep theme toggler fixed at the viewport level (outside transformed wrapper) */}
+      <AnimatedThemeToggler />
+
        <div 
          className={`transition-all duration-500 ${
            showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
          }`}
        >
-        <DarkModeToggle />
         
         {/* Sections */}
         <HomeSection />
         <AboutSection />
+        <ExperienceSection />
         <ProjectsSection />
         <ContactSection />
         <Footer />
