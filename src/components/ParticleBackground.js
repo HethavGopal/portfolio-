@@ -572,9 +572,13 @@ const ParticleBackground = () => {
         cancelAnimationFrame(animationRef.current);
       }
       
-      if (rendererRef.current && mountRef.current) {
-        mountRef.current.removeChild(rendererRef.current.domElement);
-        rendererRef.current.dispose();
+      // Store ref values to avoid stale closure issues
+      const currentMountRef = mountRef.current;
+      const currentRendererRef = rendererRef.current;
+      
+      if (currentRendererRef && currentMountRef) {
+        currentMountRef.removeChild(currentRendererRef.domElement);
+        currentRendererRef.dispose();
       }
       
       if (geometry) geometry.dispose();

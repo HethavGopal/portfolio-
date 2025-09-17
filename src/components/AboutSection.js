@@ -59,7 +59,7 @@ export default function AboutSection() {
             <div>
               <div className="space-y-3 text-sm leading-relaxed">
                 <p className={`text-center ${isDark ? 'text-white/90' : 'text-black/90'}`}>
-                  I'm a second year Math + CS student and full-stack developer based in Toronto. I'm currently looking for Winter and Summer 2026 Internships in full stack development and ML. Feel free to contact me if you have any questions!
+                  I&apos;m a second year Math + CS student and full-stack developer based in Toronto. I&apos;m currently looking for Winter and Summer 2026 Internships in full stack development and ML. Feel free to contact me if you have any questions!
                 </p>
               </div>
             </div>
